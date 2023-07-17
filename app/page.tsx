@@ -1,8 +1,23 @@
 import { Button } from "@/components/ui/button";
-import Image from "next/image";
+import { tmdbAccessToken, tmdbBaseUrl } from "@/lib/utils";
 import Link from "next/link";
 
-export default function Home() {
+export default async function Home() {
+  const url = tmdbBaseUrl + "/authentication"
+  
+  const options = {
+    method: "GET",
+    headers: {
+      accept: "application/json",
+      Authorization: "Bearer " + tmdbAccessToken,
+    },
+  };
+
+  fetch(url, options)
+    .then((res) => res.json())
+    .then((json) => console.log(json))
+    .catch((err) => console.error("error:" + err));
+
   return (
     <main className="flex min-h-screen flex-col items-center justify-center p-24">
       <div className="w-full md:w-2/4 flex flex-col items-center justify-center p-4 gap-2 rounded-xl shadow-xl">
