@@ -1,41 +1,24 @@
 import { Card, CardContent, CardHeader, CardTitle } from "../ui/card";
 import Image from "next/image";
 import {
-  tmdbBaseUrl,
-  removeEmptyQueryParams,
-  tmdbFetchOptions,
   getTmdbImageUrl,
   formatMovieRating,
   getMovieYear,
   filterMoviesWithoutDetails,
 } from "@/lib/utils";
-import { SearchResult } from "@/lib/types";
-
-async function getMovies({
-  searchParams,
-}: {
-  searchParams: { [key: string]: string };
-}): Promise<SearchResult> {
-  const params = new URLSearchParams(
-    removeEmptyQueryParams(searchParams)
-  ).toString();
-  const url = `${tmdbBaseUrl}/search/movie?${params}`;
-  const response = await fetch(url, tmdbFetchOptions);
-  const results = await response.json();
-
-  return results;
-}
+import { SearchMovieRequest } from "moviedb-promise";
+import { moviedb } from "@/lib/tmdb";
 
 export default async function MovieGrid({
   searchParams,
 }: {
-  searchParams: { [key: string]: string };
+  searchParams: SearchMovieRequest;
 }) {
   const {
     results,
     total_results: totalResults,
     total_pages: totalPages,
-  } = await getMovies({ searchParams });
+  } = await moviedb.searchMovie(searchParams);
 
   const movies = filterMoviesWithoutDetails(results);
   const isEmpty = !movies || movies.length === 0;
@@ -58,9 +41,9 @@ export default async function MovieGrid({
             <div className="w-full md:w-fit text-center pt-4 md:pt-0 text-lg">
               Found
               <span className="font-bold text-primary">
-                &nbsp;{totalResults}&nbsp;
+                &nbsp;{movies.length}&nbsp;
               </span>
-              movie{totalResults > 1 ? "s" : ""}
+              movie{movies.length > 1 ? "s" : ""}
             </div>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-8">
@@ -75,8 +58,8 @@ export default async function MovieGrid({
                       {movie.title}
                     </CardTitle>
                     <Image
-                      src={getTmdbImageUrl(movie.poster_path)}
-                      alt={movie.title}
+                      src={getTmdbImageUrl(movie.poster_path || "")}
+                      alt={movie.title!}
                       width={250}
                       height={200}
                       className="mx-auto"
@@ -88,7 +71,7 @@ export default async function MovieGrid({
                       <div>
                         Rating:&nbsp;
                         <span className="text-primary">
-                          {formatMovieRating(movie.vote_average)}
+                          {formatMovieRating(movie.vote_average || 0)}
                         </span>
                       </div>
                       <div>
