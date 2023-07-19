@@ -1,10 +1,13 @@
-import { Card, CardHeader, CardTitle } from "../ui/card";
+import { Card, CardContent, CardHeader, CardTitle } from "../ui/card";
 import Image from "next/image";
 import {
   tmdbBaseUrl,
   removeEmptyQueryParams,
   tmdbFetchOptions,
   getTmdbImageUrl,
+  formatMovieRating,
+  getMovieYear,
+  filterMoviesWithoutDetails,
 } from "@/lib/utils";
 import { SearchResult } from "@/lib/types";
 
@@ -29,11 +32,12 @@ export default async function MovieGrid({
   searchParams: { [key: string]: string };
 }) {
   const {
-    results: movies,
+    results,
     total_results: totalResults,
     total_pages: totalPages,
   } = await getMovies({ searchParams });
 
+  const movies = filterMoviesWithoutDetails(results);
   const isEmpty = !movies || movies.length === 0;
 
   return (
@@ -78,17 +82,23 @@ export default async function MovieGrid({
                       className="mx-auto"
                     />
                   </CardHeader>
-                  {/* <CardContent className="mt-auto border-t">
-                    <CardDescription className="flex justify-center gap-4">
-                      {movie.authors.map((author) => {
-                        return (
-                          <Button asChild variant={"link"} key={author} className="flex-shrink-0">
-                            <Link href={`/authors/${author}`}>{author}</Link>
-                          </Button>
-                        );
-                      })}
-                    </CardDescription>
-                  </CardContent> */}
+
+                  {
+                    <CardContent className="mt-auto">
+                      <div>
+                        Rating:&nbsp;
+                        <span className="text-primary">
+                          {formatMovieRating(movie.vote_average)}
+                        </span>
+                      </div>
+                      <div>
+                        Year:&nbsp;
+                        <span className="text-primary">
+                          {getMovieYear(movie.release_date)}
+                        </span>
+                      </div>
+                    </CardContent>
+                  }
                 </Card>
               );
             })}

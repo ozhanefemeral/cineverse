@@ -1,5 +1,6 @@
 import { type ClassValue, clsx } from "clsx";
 import { twMerge } from "tailwind-merge";
+import { Movie } from "./types";
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
@@ -25,3 +26,18 @@ export const removeEmptyQueryParams = (query: any) => {
 
 export const getTmdbImageUrl = (path: string) =>
   `https://image.tmdb.org/t/p/original${path}`;
+
+export const formatMovieRating = (rating: number) => {
+  return Math.round(rating * 10) / 10;
+};
+
+export const getMovieYear = (date: string) => {
+  if (!date) return "Unknown";
+  return new Date(date).getFullYear();
+};
+
+export const filterMoviesWithoutDetails = (movies: Movie[]) => {
+  return movies.filter((m) => {
+    if (m.vote_average && m.poster_path && m.release_date) return m;
+  });
+};
