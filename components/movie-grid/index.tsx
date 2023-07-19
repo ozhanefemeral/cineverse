@@ -23,7 +23,7 @@ async function getMovies({
   return results;
 }
 
-export default async function BookGrid({
+export default async function MovieGrid({
   searchParams,
 }: {
   searchParams: { [key: string]: string };
@@ -41,7 +41,7 @@ export default async function BookGrid({
       {isEmpty && (
         <div className="flex flex-col items-center justify-center py-4">
           <h1 className="text-3xl font-bold text-center">
-            Looks like there are no books here 😿
+            Looks like there are no movies here 😿
           </h1>
           <p className="text-center">
             Try searching for something else or check back later.
@@ -56,7 +56,7 @@ export default async function BookGrid({
               <span className="font-bold text-primary">
                 &nbsp;{totalResults}&nbsp;
               </span>
-              book{totalResults > 1 ? "s" : ""}
+              movie{totalResults > 1 ? "s" : ""}
             </div>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-8">
@@ -80,7 +80,7 @@ export default async function BookGrid({
                   </CardHeader>
                   {/* <CardContent className="mt-auto border-t">
                     <CardDescription className="flex justify-center gap-4">
-                      {book.authors.map((author) => {
+                      {movie.authors.map((author) => {
                         return (
                           <Button asChild variant={"link"} key={author} className="flex-shrink-0">
                             <Link href={`/authors/${author}`}>{author}</Link>
