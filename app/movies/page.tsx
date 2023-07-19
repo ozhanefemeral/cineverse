@@ -1,5 +1,6 @@
 import MovieGrid from "@/components/movie-grid";
 import MovieSearch from "@/components/movie-search";
+import { SearchMovieRequest } from "moviedb-promise";
 
 export const dynamic = "force-dynamic";
 
@@ -7,7 +8,7 @@ export default async function MovieSearchResults({
   searchParams,
 }: {
   params: {};
-  searchParams: { [key: string]: string };
+  searchParams: SearchMovieRequest
 }) {
   return (
     <div className="p-8">
