@@ -8,6 +8,7 @@ import {
 } from "@/lib/utils";
 import { SearchMovieRequest } from "moviedb-promise";
 import { moviedb } from "@/lib/tmdb";
+import MovieCard from "../ui/movie/movie-card";
 
 export default async function MovieGrid({
   searchParams,
@@ -47,43 +48,8 @@ export default async function MovieGrid({
             </div>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-8">
-            {movies.map((movie, index) => {
-              return (
-                <Card
-                  key={`${movie.title}-${index}`}
-                  className="flex flex-col gap-2"
-                >
-                  <CardHeader>
-                    <CardTitle className="text-center pb-4">
-                      {movie.title}
-                    </CardTitle>
-                    <Image
-                      src={getTmdbImageUrl(movie.poster_path || "")}
-                      alt={movie.title!}
-                      width={250}
-                      height={200}
-                      className="mx-auto"
-                    />
-                  </CardHeader>
-
-                  {
-                    <CardContent className="mt-auto">
-                      <div>
-                        Rating:&nbsp;
-                        <span className="text-primary">
-                          {formatMovieRating(movie.vote_average || 0)}
-                        </span>
-                      </div>
-                      <div>
-                        Year:&nbsp;
-                        <span className="text-primary">
-                          {getMovieYear(movie.release_date)}
-                        </span>
-                      </div>
-                    </CardContent>
-                  }
-                </Card>
-              );
+            {movies.map((movie) => {
+              return <MovieCard key={movie.id} movie={movie} />;
             })}
           </div>
         </>
