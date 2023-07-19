@@ -1,7 +1,9 @@
 import { MovieResult } from "moviedb-promise";
-import { Card, CardContent, CardHeader, CardTitle } from "../card";
+import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "../card";
 import { formatMovieRating, getMovieYear, getTmdbImageUrl } from "@/lib/utils";
 import Image from "next/image";
+import { Button } from "../button";
+import Link from "next/link";
 
 export default function MovieCard({ movie }: { movie: MovieResult }) {
   return (
@@ -32,6 +34,13 @@ export default function MovieCard({ movie }: { movie: MovieResult }) {
           </span>
         </div>
       </CardContent>
+      <CardFooter>
+        <div className="flex w-full flex-row justify-end">
+          <Button asChild>
+            <Link href={`/movies/${movie.id}`}>Details</Link>
+          </Button>
+        </div>
+      </CardFooter>
     </Card>
   );
 }
