@@ -8,33 +8,33 @@ import Link from "next/link";
 export default function MovieCard({ movie }: { movie: MovieResult }) {
   return (
     <Card className="flex flex-col gap-2 shrink-0">
-      <CardHeader>
-        <CardTitle className="pb-4 text-center text-xl md:text-2xl">
-          {movie.title}
-        </CardTitle>
+      <CardHeader className="w-full p-0">
         <Image
           src={getTmdbImageUrl(movie.poster_path || "")}
           alt={movie.title!}
-          width={250}
+          width={300}
           height={200}
-          className="mx-auto"
+          className="w-full rounded-tl-lg rounded-tr-lg"
         />
+        <CardTitle className="py-2 px-4 text-center text-md md:text-lg">
+          {movie.title}
+        </CardTitle>
       </CardHeader>
-      <CardContent className="mt-auto">
+      <CardFooter className="mt-auto">
         <div>
-          Rating:&nbsp;
-          <span className="text-primary">
-            {formatMovieRating(movie.vote_average || 0)}
-          </span>
+          <div>
+            Rating:&nbsp;
+            <span className="text-primary">
+              {formatMovieRating(movie.vote_average || 0)}
+            </span>
+          </div>
+          <div>
+            Year:&nbsp;
+            <span className="text-primary">
+              {getMovieYear(movie.release_date)}
+            </span>
+          </div>
         </div>
-        <div>
-          Year:&nbsp;
-          <span className="text-primary">
-            {getMovieYear(movie.release_date)}
-          </span>
-        </div>
-      </CardContent>
-      <CardFooter>
         <div className="flex w-full flex-row justify-end">
           <Button asChild>
             <Link href={`/movies/${movie.id}`}>Details</Link>
