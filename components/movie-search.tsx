@@ -14,7 +14,6 @@ export default function MovieSearch() {
     <form action="/movies" method="GET">
       <div className="flex w-full flex-col md:flex-row max-w-sm items-center gap-4">
         <Input type="hidden" name="page" value="1" />
-        <Input type="hidden" name="results_per_page" value="12" />
         <Input
           type="text"
           name="query"
