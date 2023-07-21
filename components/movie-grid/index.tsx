@@ -1,14 +1,10 @@
-import { Card, CardContent, CardHeader, CardTitle } from "../ui/card";
-import Image from "next/image";
 import {
-  getTmdbImageUrl,
-  formatMovieRating,
-  getMovieYear,
   filterMoviesWithoutDetails,
 } from "@/lib/utils";
 import { SearchMovieRequest } from "moviedb-promise";
 import { moviedb } from "@/lib/tmdb";
 import MovieCard from "../ui/movie/movie-card";
+import PaginationController from "../pagination-controller";
 
 export default async function MovieGrid({
   searchParams,
@@ -18,7 +14,7 @@ export default async function MovieGrid({
   const {
     results,
     total_results: totalResults,
-    total_pages: totalPages,
+    total_pages: totalPages = 1,
   } = await moviedb.searchMovie(searchParams);
 
   const movies = filterMoviesWithoutDetails(results);
@@ -47,11 +43,15 @@ export default async function MovieGrid({
               movie{movies.length > 1 ? "s" : ""}
             </div>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-8">
+
+          <PaginationController total={totalPages} />
+
+          <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-8 py-4 my-4 border-t border-b">
             {movies.map((movie) => {
               return <MovieCard key={movie.id} movie={movie} />;
             })}
           </div>
+          <PaginationController total={totalPages} />
         </>
       )}
     </div>

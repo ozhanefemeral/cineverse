@@ -12,7 +12,7 @@ export default async function MovieSearchResults({
 }) {
   return (
     <div className="p-8">
-      <div className="pb-4 border-b">
+      <div className="pb-4">
         <MovieSearch />
         <MovieGrid searchParams={searchParams} />
       </div>
