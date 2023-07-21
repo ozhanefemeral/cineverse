@@ -1,9 +1,10 @@
 import { MovieResult } from "moviedb-promise";
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "../card";
-import { formatMovieRating, getMovieYear, getTmdbImageUrl } from "@/lib/utils";
+import { getTmdbImageUrl } from "@/lib/utils";
 import Image from "next/image";
 import { Button } from "../button";
 import Link from "next/link";
+import CategoryBadge from "./category-badge";
 
 export default function MovieCard({ movie }: { movie: MovieResult }) {
   return (
@@ -20,21 +21,14 @@ export default function MovieCard({ movie }: { movie: MovieResult }) {
           {movie.title}
         </CardTitle>
       </CardHeader>
-      <CardFooter className="mt-auto">
-        <div>
-          <div>
-            Rating:&nbsp;
-            <span className="text-primary">
-              {formatMovieRating(movie.vote_average || 0)}
-            </span>
-          </div>
-          <div>
-            Year:&nbsp;
-            <span className="text-primary">
-              {getMovieYear(movie.release_date)}
-            </span>
-          </div>
+      <CardContent>
+        <div className="w-full flex flex-wrap gap-2 justify-center items-center">
+          {movie.genre_ids?.map((genreId) => (
+            <CategoryBadge genreId={genreId} key={`${movie.id}-${genreId}`} />
+          ))}
         </div>
+      </CardContent>
+      <CardFooter className="mt-auto flex flex-col items-start gap-2">
         <div className="flex w-full flex-row justify-end">
           <Button asChild>
             <Link href={`/movies/${movie.id}`}>Details</Link>
