@@ -4,8 +4,10 @@ import PaginatedGrid from "@/components/paginated-grid";
 
 export default async function MovieDetails({
   params,
+  searchParams,
 }: {
   params: { slug: string };
+  searchParams: { page: number };
 }) {
   const { slug } = params;
   const categoryId = getMovieCategoryId(slug);
@@ -19,6 +21,7 @@ export default async function MovieDetails({
         searchParams={{
           category: categoryId,
           query: "",
+          page: searchParams.page,
         }}
       />
     </div>

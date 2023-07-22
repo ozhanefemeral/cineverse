@@ -1,7 +1,7 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
-import { useRouter, useSearchParams } from "next/navigation";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import {
   Select,
   SelectContent,
@@ -13,21 +13,23 @@ import {
 export default function PaginationController({ total }: { total: number }) {
   const searchParams = useSearchParams();
   const router = useRouter();
+  const pathname = usePathname();
   const currentPage = Number(searchParams.get("page")) || 1;
 
   const canGoBack = currentPage > 1;
   const canGoForward = currentPage < total;
 
   const goToPage = (page: number) => {
-    const currentUrl = window.location.href;
-
     if (!canGoBack && page < currentPage) return;
     else if (!canGoForward && page > currentPage) return;
 
-    router.push(
-      currentUrl.replace("page=" + currentPage, "page=" + page),
-      undefined
-    );
+    const current = new URLSearchParams(Array.from(searchParams.entries()));
+    current.set("page", page.toString());
+
+    const search = current.toString();
+    const query = search ? `?${search}` : "";
+
+    router.push(`${pathname}${query}`);
   };
 
   return (
@@ -35,24 +37,7 @@ export default function PaginationController({ total }: { total: number }) {
       <Button disabled={!canGoBack} onClick={() => goToPage(currentPage - 1)}>
         Previous
       </Button>
-      <div className="flex-shrink-0">
-        <Select
-          name="page"
-          value={currentPage.toString()}
-          onValueChange={(value) => goToPage(Number(value))}
-        >
-          <SelectTrigger className="flex-shrink-0">
-            <SelectValue placeholder={currentPage} />
-          </SelectTrigger>
-          <SelectContent className="max-h-60 overflow-y-auto">
-            {Array.from({ length: total }, (_, i) => i + 1).map((page) => (
-              <SelectItem key={page} value={page.toString()}>
-                {page}
-              </SelectItem>
-            ))}
-          </SelectContent>
-        </Select>
-      </div>
+      {currentPage}
       <Button
         disabled={!canGoForward}
         onClick={() => goToPage(currentPage + 1)}

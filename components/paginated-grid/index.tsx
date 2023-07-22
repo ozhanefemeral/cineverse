@@ -24,6 +24,7 @@ async function MovieGrid({ searchParams, fetchType }: MovieGridProps) {
     case "category":
       response = await moviedb.discoverMovie({
         with_genres: searchParams.category,
+        ...searchParams,
       });
 
       break;
@@ -33,7 +34,7 @@ async function MovieGrid({ searchParams, fetchType }: MovieGridProps) {
     total_pages: 0,
     total_results: 0,
   };
-
+  
   const movies = filterMoviesWithoutDetails(response?.results);
 
   const isEmpty = !movies || !totalResults || !totalPages;
