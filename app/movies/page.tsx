@@ -1,4 +1,4 @@
-import MovieGrid from "@/components/movie-grid";
+import PaginatedGrid from "@/components/paginated-grid";
 import MovieSearch from "@/components/movie-search";
 import { SearchMovieRequest } from "moviedb-promise";
 
@@ -14,7 +14,7 @@ export default async function MovieSearchResults({
     <div className="p-8">
       <div className="pb-4">
         <MovieSearch />
-        <MovieGrid searchParams={searchParams} />
+        <PaginatedGrid searchParams={searchParams} fetchType="search"/>
       </div>
     </div>
   );

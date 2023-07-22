@@ -30,8 +30,6 @@ export default function PaginationController({ total }: { total: number }) {
     );
   };
 
-  console.log("total", total);
-
   return (
     <div className="flex justify-center items-center gap-4">
       <Button disabled={!canGoBack} onClick={() => goToPage(currentPage - 1)}>

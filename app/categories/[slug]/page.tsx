@@ -1,7 +1,6 @@
-import Grid from "@/components/ui/grid";
-import MovieCard from "@/components/ui/movie/movie-card";
 import { moviedb } from "@/lib/tmdb";
 import { getMovieCategoryId, getMovieCategoryName } from "@/lib/utils";
+import PaginatedGrid from "@/components/paginated-grid";
 
 export default async function MovieDetails({
   params,
@@ -25,10 +24,13 @@ export default async function MovieDetails({
   return (
     <div className="w-full flex flex-col items-center justify-center">
       <h1 className="text-2xl font-bold">{category}</h1>
-      <Grid>
-        {!isEmpty &&
-          movies.map((movie) => <MovieCard key={movie.id} movie={movie} />)}
-      </Grid>
+      <PaginatedGrid
+        fetchType="category"
+        searchParams={{
+          category: categoryId,
+          query: "",
+        }}
+      />
     </div>
   );
 }
