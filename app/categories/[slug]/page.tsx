@@ -9,21 +9,11 @@ export default async function MovieDetails({
 }) {
   const { slug } = params;
   const categoryId = getMovieCategoryId(slug);
-  const category = getMovieCategoryName(categoryId);
-
-  const {
-    results: movies,
-    total_results: totalResults,
-    total_pages: totalPages,
-  } = await moviedb.discoverMovie({
-    with_genres: getMovieCategoryId(slug),
-  });
-
-  const isEmpty = !movies || movies.length === 0;
+  const categoryName = getMovieCategoryName(slug);
 
   return (
     <div className="w-full flex flex-col items-center justify-center">
-      <h1 className="text-2xl font-bold">{category}</h1>
+      <h1 className="text-2xl font-bold">{categoryName}</h1>
       <PaginatedGrid
         fetchType="category"
         searchParams={{
