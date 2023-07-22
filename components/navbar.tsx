@@ -65,17 +65,11 @@ export default function Navbar() {
           <NavigationMenuContent>
             <ul className="grid gap-3 p-4 md:w-[500px] grid-cols-3 md:grid-cols-4 lg:w-[600px] ">
               {movieCategories.map((category) => (
-                // <NavigationMenuLink asChild>
-                //   <ListItem
-                //     key={category.id}
-                //     title={category.name}
-                //     href={`/categories/${category.slug}`}
-                //   ></ListItem>
-                // </NavigationMenuLink>
                 <Link
                   href={`/categories/${category.slug}`}
                   legacyBehavior
                   passHref
+                  key={category.id}
                 >
                   <NavigationMenuLink className={navigationMenuTriggerStyle()}>
                     {category.name}
