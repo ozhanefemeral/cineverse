@@ -5,6 +5,7 @@ import MovieCard from "../ui/movie/movie-card";
 import PaginationController from "../pagination-controller";
 import Grid from "../ui/grid";
 import { Suspense } from "react";
+import GridLoading from "../grid-loading";
 
 export type movieFetchType = "search" | "category";
 
@@ -34,7 +35,6 @@ async function MovieGrid({ searchParams, fetchType }: MovieGridProps) {
     total_pages: 0,
     total_results: 0,
   };
-  
   const movies = filterMoviesWithoutDetails(response?.results);
 
   const isEmpty = !movies || !totalResults || !totalPages;
@@ -80,7 +80,7 @@ export default async function PaginatedGrid({
   fetchType,
 }: MovieGridProps) {
   return (
-    <Suspense fallback={<div>Loading...</div>}>
+    <Suspense fallback={<GridLoading />}>
       <MovieGrid searchParams={searchParams} fetchType={fetchType} />
     </Suspense>
   );
