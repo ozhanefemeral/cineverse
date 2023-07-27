@@ -2,6 +2,8 @@ import RecommendedMoviesRow from "@/components/recommendations/recommendations-r
 import { moviedb } from "@/lib/tmdb";
 import { CreditsResponse, MovieResponse } from "moviedb-promise";
 import Image from "next/image";
+import { Rating } from "@smastrom/react-rating";
+import MovieRating from "@/components/ui/movie/movie-rating";
 
 export default async function MovieDetails({
   params,
@@ -24,27 +26,35 @@ export default async function MovieDetails({
           className="mx-auto"
         />
       </div>
+
       <div className="w-full md:w-2/3 flex flex-col gap-2 p-4">
-        <h1 className="text-2xl font-bold">{details.title}</h1>
-        <div className="text-primary">{details.tagline}</div>
-        <div className="text-primary">{details.overview}</div>
+        <h1 className="text-3xl font-bold">{details.title}</h1>
+        <p className="text-xl text-gray-400 italic -mt-2">{details.tagline}</p>
+        <div className="pb-4">
+          <MovieRating rating={details.vote_average || 0} />
+        </div>
+        <div className="pt-4">{details.overview}</div>
         {cast && (
-          <div className="py-4">
-            <h3 className="text-xl font-bold pb-2">Cast</h3>
-            <div className="flex flex-row flex-wrap justify-evenly gap-4">
-              {cast.slice(0, 5).map((actor) => (
+          <div className="pt-4">
+            <h3 className="text-xl font-bold">Cast</h3>
+            <div className="flex flex-row gap-4 overflow-scroll w-full py-2 pb-6">
+              {cast.slice(0, 15).map((actor) => (
                 <div
                   key={actor.id}
-                  className="flex flex-col items-center border rounded-lg overflow-hidden"
+                  className="flex flex-col border rounded-lg overflow-hidden w-1/6 shrink-0"
                 >
-                  <Image
-                    src={`https://image.tmdb.org/t/p/w500${actor.profile_path}`}
-                    alt={actor.name + " poster"}
-                    width={150}
-                    height={200}
-                  />
+                  <div className="overflow-hidden">
+                    <Image
+                      src={`https://image.tmdb.org/t/p/w500${actor.profile_path}`}
+                      alt={actor.name + " poster"}
+                      width={150}
+                      height={200}
+                    />
+                  </div>
                   <p className="text-center p-2 px-4">{actor.name}</p>
-                  <p className="text-center font-light text-gray-400">{actor.character}</p>
+                  <p className="text-center w-full font-light text-gray-400">
+                    {actor.character}
+                  </p>
                 </div>
               ))}
             </div>

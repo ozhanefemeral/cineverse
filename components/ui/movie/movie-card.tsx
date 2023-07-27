@@ -5,6 +5,7 @@ import Image from "next/image";
 import { Button } from "../button";
 import Link from "next/link";
 import CategoryBadge from "./category-badge";
+import MovieRating from "./movie-rating";
 
 export default function MovieCard({ movie }: { movie: MovieResult }) {
   return (
@@ -29,7 +30,8 @@ export default function MovieCard({ movie }: { movie: MovieResult }) {
         </div>
       </CardContent>
       <CardFooter className="mt-auto flex flex-col items-start gap-2">
-        <div className="flex w-full flex-row justify-end">
+        <div className="flex w-full flex-row justify-between">
+          <MovieRating rating={movie.vote_average || 0} />
           <Button asChild>
             <Link href={`/movies/${movie.id}`}>Details</Link>
           </Button>
