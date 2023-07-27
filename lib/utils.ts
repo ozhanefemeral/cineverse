@@ -142,6 +142,13 @@ export const movieCategories = [
     slug: "romance",
     catchphrase: "Love in the Air: Romance Movies to Melt Your Heart!",
   },
+  {
+    id: "-1",
+    name: "Top Rated",
+    slug: "top-rated",
+    catchphrase:
+      "Meet the best of the best movies: the top rated ones of all time!",
+  },
   // Add the remaining categories here
 ] as MovieCategory[];
 

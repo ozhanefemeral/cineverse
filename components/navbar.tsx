@@ -39,9 +39,9 @@ export default function Navbar() {
       </Button>
       <NavigationMenuList>
         <NavigationMenuItem>
-          <NavigationMenuTrigger>Trending</NavigationMenuTrigger>
+          <NavigationMenuTrigger>Movies</NavigationMenuTrigger>
           <NavigationMenuContent>
-            <ul className="grid gap-3 p-4 md:w-[400px] lg:w-[500px] lg:grid-cols-[.75fr_1fr]">
+            <ul className="grid gap-3 p-4 md:w-[400px] lg:w-[500px] lg:grid-cols-[1fr_0.6fr]">
               <li className="row-span-3">
                 <Link href="/trending/movies" legacyBehavior passHref>
                   <NavigationMenuLink asChild>
@@ -57,6 +57,11 @@ export default function Navbar() {
                   </NavigationMenuLink>
                 </Link>
               </li>
+              <Link href={`/movies/top-rated`} legacyBehavior passHref>
+                <NavigationMenuLink className={navigationMenuTriggerStyle()}>
+                  Top Rated Movies ⭐️
+                </NavigationMenuLink>
+              </Link>
             </ul>
           </NavigationMenuContent>
         </NavigationMenuItem>
