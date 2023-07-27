@@ -4,7 +4,7 @@ import { getTmdbImageUrl } from "@/lib/utils";
 import Image from "next/image";
 import { Button } from "../button";
 import Link from "next/link";
-import CategoryBadge from "./category-badge";
+import CategoryBadge from "../category/category-badge";
 import MovieRating from "./movie-rating";
 
 export default function MovieCard({ movie }: { movie: MovieResult }) {
