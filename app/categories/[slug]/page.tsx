@@ -11,6 +11,7 @@ import MovieCard from "@/components/ui/movie/movie-card";
 import PaginationController from "@/components/pagination-controller";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
+import CategoryHeader from "@/components/ui/category/category-header";
 
 export default async function CategoryPage({
   params,
@@ -54,10 +55,7 @@ export default async function CategoryPage({
 
   return (
     <div className="w-full flex flex-col items-center justify-center">
-      <div className="py-4 text-center">
-        <h1 className="text-2xl font-bold">{category.name}</h1>
-        <p className="  text-gray-400">{category.catchphrase}</p>
-      </div>
+      <CategoryHeader category={category} />
       <Suspense fallback={<GridLoading />}>
         <Grid className="py-4">
           {movies?.map((movie) => (
