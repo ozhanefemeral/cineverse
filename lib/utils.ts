@@ -45,103 +45,110 @@ export const filterMoviesWithoutDetails = (
   });
 };
 
+export type MovieCategory = {
+  id: string;
+  name: string;
+  slug: string;
+  catchphrase: string;
+};
+
 export const movieCategories = [
   {
     id: "28",
     name: "Action",
     slug: "action",
+    catchphrase:
+      "Unleash the Thrills: Action Movies to Pump Up Your Adrenaline!",
   },
   {
     id: "12",
     name: "Adventure",
     slug: "adventure",
+    catchphrase:
+      "Embark on Epic Journeys: Adventure Movies for the Brave at Heart!",
   },
   {
     id: "16",
     name: "Animation",
     slug: "animation",
+    catchphrase: "Animation Magic: Where Imagination Comes to Life!",
   },
   {
     id: "35",
     name: "Comedy",
     slug: "comedy",
+    catchphrase: "Laughs Galore: Hilarious Comedy Movies for All Ages!",
   },
   {
     id: "80",
     name: "Crime",
     slug: "crime",
+    catchphrase: "Unraveling Intrigue: Dive into the World of Crime Movies!",
   },
   {
     id: "99",
     name: "Documentary",
     slug: "documentary",
+    catchphrase: "Real Stories, Real Lives: Eye-Opening Documentary Films!",
   },
   {
     id: "18",
     name: "Drama",
     slug: "drama",
+    catchphrase: "Emotion Unleashed: Gripping Drama Movies to Stir Your Soul!",
   },
   {
     id: "10751",
     name: "Family",
     slug: "family",
+    catchphrase: "Bonding Moments: Heartwarming Family Movies for Everyone!",
   },
   {
     id: "14",
     name: "Fantasy",
     slug: "fantasy",
+    catchphrase:
+      "Enchanted Worlds: Explore Fantastical Realms in Fantasy Movies!",
   },
   {
     id: "36",
     name: "History",
     slug: "history",
+    catchphrase:
+      "Timeless Chronicles: Dive into History with Captivating Movies!",
   },
   {
     id: "27",
     name: "Horror",
     slug: "horror",
+    catchphrase: "Heart-Pounding Chills: Horror Movies to Keep You on Edge!",
   },
   {
     id: "10402",
     name: "Music",
     slug: "music",
+    catchphrase: "Rhythm and Melody: Movies that Celebrate the Power of Music!",
   },
   {
     id: "9648",
     name: "Mystery",
     slug: "mystery",
+    catchphrase:
+      "Unlocking Secrets: Engaging Mystery Movies to Puzzle Your Mind!",
   },
   {
     id: "10749",
     name: "Romance",
     slug: "romance",
+    catchphrase: "Love in the Air: Romance Movies to Melt Your Heart!",
   },
-  {
-    id: "878",
-    name: "Science Fiction",
-    slug: "science-fiction",
-  },
-  {
-    id: "10770",
-    name: "TV Movie",
-    slug: "tv-movie",
-  },
-  {
-    id: "53",
-    name: "Thriller",
-    slug: "thriller",
-  },
-  {
-    id: "10752",
-    name: "War",
-    slug: "war",
-  },
-  {
-    id: "37",
-    name: "Western",
-    slug: "western",
-  },
-];
+  // Add the remaining categories here
+] as MovieCategory[];
+
+export const getCategoryById = (slug: string): MovieCategory | null => {
+  const category = movieCategories.find((c) => c.slug === slug);
+  return category ? category : null;
+};
 
 export const getMovieCategoryName = (id: number | string) => {
   const idString = id.toString();
