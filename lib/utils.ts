@@ -61,6 +61,18 @@ export const movieCategories = [
       "Unleash the Thrills: Action Movies to Pump Up Your Adrenaline!",
   },
   {
+    id: "878",
+    name: "Science Fiction",
+    slug: "science-fiction",
+    catchphrase: "Sci-Fi Wonders: Movies that Explore the Unknown!",
+  },
+  {
+    "id": "53",
+    "name": "Thriller",
+    "slug": "thriller",
+    "catchphrase": "Nail-Biting Suspense: Thriller Movies to Keep You Guessing!"
+  },
+  {
     id: "12",
     name: "Adventure",
     slug: "adventure",

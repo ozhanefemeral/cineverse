@@ -30,7 +30,7 @@ export default function MovieCard({ movie }: { movie: MovieResult }) {
         </div>
       </CardContent>
       <CardFooter className="mt-auto flex flex-col items-start gap-2">
-        <div className="flex w-full flex-row justify-between">
+        <div className="flex w-full flex-col md:flex-row gap-4 justify-between">
           <MovieRating rating={movie.vote_average || 0} />
           <Button asChild>
             <Link href={`/movies/${movie.id}`}>Details</Link>

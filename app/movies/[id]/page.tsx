@@ -41,7 +41,7 @@ export default async function MovieDetails({
               {cast.slice(0, 15).map((actor) => (
                 <div
                   key={actor.id}
-                  className="flex flex-col border rounded-lg overflow-hidden w-1/6 shrink-0"
+                  className="flex flex-col border rounded-lg overflow-hidden w-1/3 md:w-1/6 shrink-0 justify-evenly"
                 >
                   <div className="overflow-hidden">
                     <Image
@@ -51,8 +51,10 @@ export default async function MovieDetails({
                       height={200}
                     />
                   </div>
-                  <p className="text-center p-2 px-4">{actor.name}</p>
-                  <p className="text-center w-full font-light text-gray-400">
+                  <p className="text-center text-sm md:text-base p-2 px-2 md:px-4">
+                    {actor.name}
+                  </p>
+                  <p className="text-center text-sm md:text-base w-full px-2 md:px-4 font-light text-gray-400">
                     {actor.character}
                   </p>
                 </div>
