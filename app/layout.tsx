@@ -22,7 +22,7 @@ export default function RootLayout({
         <ThemeProvider attribute="class" defaultTheme="dark">
           <div className="lg:flex">
             <Navbar />
-            <div className="flex flex-1 p-4">{children}</div>
+            <div className="flex flex-1 w-full overflow-hidden p-4">{children}</div>
           </div>
         </ThemeProvider>
       </body>

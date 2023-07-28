@@ -16,45 +16,43 @@ export default async function MovieDetails({
   })) as CreditsResponse;
 
   return (
-    <div className="flex flex-col flex-wrap md:flex-row justify-center">
-      <div className="w-full md:w-1/3 p-4">
+    <div className="flex flex-col flex-wrap md:flex-row justify-center items-stretch">
+      <div className="w-full md:w-1/4 p-4 h-fit">
         <Image
           src={`https://image.tmdb.org/t/p/w500${details.poster_path}`}
           alt={details.title!}
           width={500}
           height={750}
-          className="mx-auto"
         />
       </div>
 
-      <div className="w-full md:w-2/3 flex flex-col gap-2 p-4">
+      <div className="w-full md:w-3/4 flex flex-col gap-2 p-4 pb-0">
         <h1 className="text-3xl font-bold">{details.title}</h1>
         <p className="text-xl text-gray-400 italic -mt-2">{details.tagline}</p>
-        <div className="pb-4">
-          <MovieRating rating={details.vote_average || 0} />
+        <div className="flex items-end gap-4 pb-4">
+          <MovieRating rating={details.vote_average || 0} />{" "}
+          {details.vote_average?.toFixed(2)} - voted by {details.vote_count}{" "}
         </div>
-        <div className="pt-4">{details.overview}</div>
+        <div className="pt-4 mt-auto">{details.overview}</div>
         {cast && (
           <div className="pt-4">
             <h3 className="text-xl font-bold">Cast</h3>
-            <div className="flex flex-row gap-4 overflow-scroll w-full py-2 pb-6">
+            <div className="flex flex-row gap-4 overflow-scroll w-full py-2 pb-6 mt-auto">
               {cast.slice(0, 15).map((actor) => (
                 <div
                   key={actor.id}
-                  className="flex flex-col border rounded-lg overflow-hidden w-1/3 md:w-1/6 shrink-0 justify-evenly"
+                  className="flex flex-col border rounded-lg overflow-hidden w-1/3 md:w-1/6 shrink-0 justify-evenly items-center"
                 >
-                  <div className="overflow-hidden">
-                    <Image
-                      src={`https://image.tmdb.org/t/p/w500${actor.profile_path}`}
-                      alt={actor.name + " poster"}
-                      width={150}
-                      height={200}
-                    />
-                  </div>
+                  <Image
+                    src={`https://image.tmdb.org/t/p/w500${actor.profile_path}`}
+                    alt={actor.name + " poster"}
+                    width={150}
+                    height={200}
+                  />
                   <p className="text-center text-sm md:text-base p-2 px-2 md:px-4">
                     {actor.name}
                   </p>
-                  <p className="text-center text-sm md:text-base w-full px-2 md:px-4 font-light text-gray-400">
+                  <p className="text-center text-sm md:text-base w-full px-2 md:px-4 py-2 font-light text-gray-400">
                     {actor.character}
                   </p>
                 </div>
@@ -63,8 +61,8 @@ export default async function MovieDetails({
           </div>
         )}
       </div>
-      <div className="w-full p-4">
-        <h2 className="text-xl py-4 font-bold">You might also like these...</h2>
+      <div className="w-full p-4 border-t">
+        <h2 className="text-xl pb-4 font-bold">You might also like these...</h2>
         <RecommendedMoviesRow basedOn={params.id} />
       </div>
     </div>

@@ -33,7 +33,7 @@ export default async function Home() {
         <Button variant="link">
           <h1 className="text-4xl font-bold text-center">Cineverse</h1>
         </Button>
-        <p className="text-2xl font-light">Exploring Movies Made Easy 🍿</p>
+        <p className="text-xl font-light">Exploring Movies Made Easy 🍿</p>
         <div className="flex flex-col items-center justify-center p-4 gap-2">
           <Button asChild variant="default">
             <Link href="/trending/movies">Browse Trending Movies</Link>

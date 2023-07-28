@@ -18,11 +18,11 @@ export default function MovieCard({ movie }: { movie: MovieResult }) {
           height={200}
           className="w-full rounded-tl-lg rounded-tr-lg"
         />
-        <CardTitle className="py-2 px-4 text-center text-md md:text-lg">
+        <CardTitle className="pt-2 px-4 text-center text-md md:text-lg">
           {movie.title}
         </CardTitle>
       </CardHeader>
-      <CardContent>
+      <CardContent className="md:p-4 pt-0">
         <div className="w-full flex flex-wrap gap-2 justify-center items-center">
           {movie.genre_ids?.map((genreId) => (
             <CategoryBadge genreId={genreId} key={`${movie.id}-${genreId}`} />
