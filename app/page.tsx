@@ -22,7 +22,7 @@ export default async function Home() {
     .catch((err) => console.error("error:" + err));
 
   return (
-    <main className="flex min-h-screen flex-col items-center justify-center">
+    <main className="flex w-full min-h-screen flex-col items-center justify-center">
       <div className="w-full flex flex-col items-center justify-center p-4 gap-2">
         <Image
           src={cineverseLogo}

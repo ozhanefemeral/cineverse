@@ -55,9 +55,9 @@ export default async function CategoryPage({
 
   return (
     <div className="w-full flex flex-col items-center justify-center">
-      <CategoryHeader category={category} />
       <Suspense fallback={<GridLoading />}>
-        <Grid className="py-4">
+        <CategoryHeader category={category} />
+        <Grid>
           {movies?.map((movie) => (
             <MovieCard key={movie.id} movie={movie} />
           ))}

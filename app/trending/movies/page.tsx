@@ -1,8 +1,12 @@
 import GridLoading from "@/components/grid-loading";
+import { Button } from "@/components/ui/button";
+import CategoryHeader from "@/components/ui/category/category-header";
 import Grid from "@/components/ui/grid";
 import MovieCard from "@/components/ui/movie/movie-card";
 import { moviedb } from "@/lib/tmdb";
+import { getCategoryById } from "@/lib/utils";
 import { MovieResult } from "moviedb-promise";
+import Link from "next/link";
 import { Suspense } from "react";
 
 export default async function TrendingMovies() {
@@ -22,16 +26,31 @@ export default async function TrendingMovies() {
   };
 
   if (!movies) return <div className="text-center">No movies found 😿</div>;
+  const category = getCategoryById("trending");
+
+  if (!category) {
+    return (
+      <div className="flex justify-center flex-col items-center">
+        <h1 className="text-2xl font-bold text-center py-4">
+          Category not found
+        </h1>
+        <Button asChild>
+          <Link href="/">Go back home</Link>
+        </Button>
+      </div>
+    );
+  }
 
   return (
-    <>
+    <div className="w-full flex flex-col items-center justify-center">
       <Suspense fallback={<GridLoading />}>
+        <CategoryHeader category={category} />
         <Grid>
           {movies.map((movie) => (
             <MovieCard key={movie.id} movie={movie} />
           ))}
         </Grid>
       </Suspense>
-    </>
+    </div>
   );
 }
