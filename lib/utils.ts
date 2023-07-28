@@ -50,6 +50,7 @@ export type MovieCategory = {
   name: string;
   slug: string;
   catchphrase: string;
+  isSpecial?: boolean;
 };
 
 export const movieCategories = [
@@ -160,9 +161,16 @@ export const movieCategories = [
     slug: "top-rated",
     catchphrase:
       "Meet the best of the best movies: the top rated ones of all time!",
+    isSpecial: true,
   },
-  // Add the remaining categories here
-] as MovieCategory[];
+  {
+    id: "-2",
+    name: "Trending",
+    slug: "trending",
+    catchphrase: "Discover the most popular movies of the moment!",
+    isSpecial: true,
+  }
+].sort((a, b) => a.name.localeCompare(b.name)) as MovieCategory[];
 
 export const getCategoryById = (slug: string): MovieCategory | null => {
   const category = movieCategories.find((c) => c.slug === slug);

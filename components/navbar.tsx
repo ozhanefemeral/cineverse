@@ -1,116 +1,68 @@
 "use client";
 
-import * as React from "react";
-import Link from "next/link";
-
 import { cn, movieCategories } from "@/lib/utils";
-import {
-  NavigationMenu,
-  NavigationMenuContent,
-  NavigationMenuItem,
-  NavigationMenuLink,
-  NavigationMenuList,
-  NavigationMenuTrigger,
-  navigationMenuTriggerStyle,
-} from "@/components/ui/navigation-menu";
-import { Button } from "./ui/button";
+import { Button } from "@/components/ui/button";
+import Link from "next/link";
 import Image from "next/image";
 import cineverseLogo from "@/public/cineverse.svg";
-import { usePathname } from "next/navigation";
+import MovieSearch from "./movie-search";
+import FloatingMenu from "./floating-menu";
 
-export default function Navbar() {
-  const path = usePathname();
-
-  if (path === "/") {
-    return <></>;
-  }
+export default function Navbar({ className }: { className?: string }) {
   return (
-    <NavigationMenu className="p-4">
-      <Button asChild variant="link">
-        <Link href="/" className="flex gap-2">
-          <Image
-            src={cineverseLogo}
-            alt="Cineverse Logo"
-            width={40}
-            height={40}
-          />
-          <h1 className="text-3xl font-bold">Cineverse</h1>
-        </Link>
-      </Button>
-      <NavigationMenuList>
-        <NavigationMenuItem>
-          <NavigationMenuTrigger>Movies</NavigationMenuTrigger>
-          <NavigationMenuContent>
-            <ul className="grid gap-3 p-4 md:w-[400px] lg:w-[500px] lg:grid-cols-[1fr_0.6fr]">
-              <li className="row-span-3">
-                <Link href="/trending/movies" legacyBehavior passHref>
-                  <NavigationMenuLink asChild>
-                    <a className="flex h-full w-full select-none flex-col rounded-md bg-gradient-to-b justify-end from-red-500 to-red-900 p-6 no-underline outline-none focus:shadow-md">
-                      <div className="mb-2 mt-4 text-lg font-medium">
-                        Trending Movies 🍿
-                      </div>
-                      <p className="text-sm leading-tight">
-                        Your Ticket to the Latest Hits: Unveiling the Trending
-                        Movies!
-                      </p>
-                    </a>
-                  </NavigationMenuLink>
-                </Link>
-              </li>
-              <Link href={`/movies/top-rated`} legacyBehavior passHref>
-                <NavigationMenuLink className={navigationMenuTriggerStyle()}>
-                  Top Rated Movies ⭐️
-                </NavigationMenuLink>
+    <>
+      <FloatingMenu />
+      <div className="hidden lg:block md:relative scrollable-container flex-none border-r p-3 lg:w-60 xl:w-72">
+        <div className="py-4">
+          <div className="px-3 flex justify-center">
+            <Button asChild variant="link">
+              <Link href="/" className="flex gap-2 mb-6">
+                <Image
+                  src={cineverseLogo}
+                  alt="Cineverse Logo"
+                  width={40}
+                  height={40}
+                />
+                <h1 className="text-xl lg:text-2xl xl:text-3xl font-bold">
+                  Cineverse
+                </h1>
               </Link>
-            </ul>
-          </NavigationMenuContent>
-        </NavigationMenuItem>
-        <NavigationMenuItem>
-          <NavigationMenuTrigger>Categories</NavigationMenuTrigger>
-          <NavigationMenuContent>
-            <ul className="grid gap-3 p-4 md:w-[500px] grid-cols-3 md:grid-cols-4 lg:w-[600px] ">
-              {movieCategories.map((category) => (
-                <Link
-                  href={`/categories/${category.slug}`}
-                  legacyBehavior
-                  passHref
-                  key={category.id}
-                >
-                  <NavigationMenuLink className={navigationMenuTriggerStyle()}>
-                    {category.name}
-                  </NavigationMenuLink>
-                </Link>
-              ))}
-            </ul>
-          </NavigationMenuContent>
-        </NavigationMenuItem>
-      </NavigationMenuList>
-    </NavigationMenu>
+            </Button>
+          </div>
+          <div className="px-3 pb-8">
+            <Link
+              className="flex h-full w-full select-none flex-col rounded-md bg-gradient-to-b justify-end from-red-500 to-red-900 p-4 py-8 focus:shadow-md mb-4"
+              href="/trending/movies"
+            >
+              <div className="text-lg font-medium text-center">
+                Trending Movies 🍿
+              </div>
+            </Link>
+            <MovieSearch vertical />
+          </div>
+          <div className="px-3 py-2">
+            <h2 className="mb-2 text-xl text-center font-semibold">
+              Categories
+            </h2>
+            <div className="space-y-1">
+              <ul className="grid grid-cols-1 xl:grid-cols-2 text-center gap-2">
+                {movieCategories
+                  .filter((m) => !m.isSpecial)
+                  .map((category) => (
+                    <Button asChild variant="link" key={category.id}>
+                      <Link
+                        href={`/categories/${category.slug}`}
+                        key={category.id}
+                      >
+                        {category.name}
+                      </Link>
+                    </Button>
+                  ))}
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </>
   );
 }
-
-const ListItem = React.forwardRef<
-  React.ElementRef<"a">,
-  React.ComponentPropsWithoutRef<"a">
->(({ className, title, children, ...props }, ref) => {
-  return (
-    <li>
-      <NavigationMenuLink asChild>
-        <a
-          ref={ref}
-          className={cn(
-            "block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground",
-            className
-          )}
-          {...props}
-        >
-          <div className="text-sm font-medium leading-none">{title}</div>
-          <p className="line-clamp-2 text-sm leading-snug text-muted-foreground">
-            {children}
-          </p>
-        </a>
-      </NavigationMenuLink>
-    </li>
-  );
-});
-ListItem.displayName = "ListItem";

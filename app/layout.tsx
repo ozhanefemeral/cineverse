@@ -1,6 +1,6 @@
 import { ThemeProvider } from "@/components/theme-provider";
 import "./globals.css";
-import '@smastrom/react-rating/style.css';
+import "@smastrom/react-rating/style.css";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import Navbar from "@/components/navbar";
@@ -20,8 +20,10 @@ export default function RootLayout({
     <html lang="en">
       <body className={inter.className}>
         <ThemeProvider attribute="class" defaultTheme="dark">
-          <Navbar />
-          {children}
+          <div className="lg:flex">
+            <Navbar />
+            <div className="flex flex-1 p-4">{children}</div>
+          </div>
         </ThemeProvider>
       </body>
     </html>
