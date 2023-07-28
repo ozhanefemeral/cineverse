@@ -38,6 +38,14 @@ export default function Navbar({ className }: { className?: string }) {
                 Trending Movies 🍿
               </div>
             </Link>
+            <Link
+              className="flex h-full w-full select-none flex-col rounded-md bg-gradient-to-b justify-end from-blue-500 to-blue-900 p-4 py-8 focus:shadow-md mb-4"
+              href="/top-rated/movies"
+            >
+              <div className="text-lg font-medium text-center">
+                Top Rated 🌟
+              </div>
+            </Link>
             <MovieSearch vertical />
           </div>
           <div className="px-3 py-2">
