@@ -26,7 +26,7 @@ export default async function RecommendedMoviesRow({
     );
 
   return (
-    <div className="flex flex-row gap-8 overflow-scroll w-full">
+    <div className="flex flex-row gap-8 overflow-x-scroll w-full">
       {movies.map((movie) => (
         <Link
           href={`/movies/${movie.id}`}

@@ -20,7 +20,7 @@ export default function RootLayout({
     <html lang="en">
       <body className={inter.className}>
         <ThemeProvider attribute="class" defaultTheme="dark">
-          <div className="lg:flex">
+          <div className="lg:flex max-w-full">
             <Navbar />
             <div className="flex flex-1 w-full overflow-hidden p-4">{children}</div>
           </div>

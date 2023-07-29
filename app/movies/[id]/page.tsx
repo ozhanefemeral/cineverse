@@ -4,6 +4,7 @@ import { CreditsResponse, MovieResponse } from "moviedb-promise";
 import Image from "next/image";
 import { Rating } from "@smastrom/react-rating";
 import MovieRating from "@/components/ui/movie/movie-rating";
+import CategoryBadge from "@/components/ui/category/category-badge";
 
 export default async function MovieDetails({
   params,
@@ -16,8 +17,8 @@ export default async function MovieDetails({
   })) as CreditsResponse;
 
   return (
-    <div className="flex flex-col flex-wrap md:flex-row justify-center items-stretch">
-      <div className="w-full md:w-1/4 p-4 h-fit">
+    <div className="flex flex-col flex-wrap md:flex-row overflow-hidden justify-center items-stretch">
+      <div className="max-w-sm md:w-1/4 h-fit">
         <Image
           src={`https://image.tmdb.org/t/p/w500${details.poster_path}`}
           alt={details.title!}
@@ -33,11 +34,23 @@ export default async function MovieDetails({
           <MovieRating rating={details.vote_average || 0} />{" "}
           {details.vote_average?.toFixed(2)} - voted by {details.vote_count}{" "}
         </div>
-        <div className="pt-4 mt-auto">{details.overview}</div>
+        <div className="pt-4">{details.overview}</div>
+        <div className="flex flex-row gap-4 mt-auto w-full overflow-x-auto">
+          {details.genres?.map((genre) => (
+            <>
+              {genre.id && (
+                <CategoryBadge
+                  genreId={genre.id}
+                  key={`${details.id}-${genre.id}`}
+                />
+              )}
+            </>
+          ))}
+        </div>
         {cast && (
           <div className="pt-4">
             <h3 className="text-xl font-bold">Cast</h3>
-            <div className="flex flex-row gap-4 overflow-scroll w-full py-2 pb-6 mt-auto">
+            <div className="flex flex-row gap-4 overflow-x-scroll w-full py-2 pb-6 mt-auto">
               {cast.slice(0, 15).map((actor) => (
                 <div
                   key={actor.id}
@@ -61,7 +74,7 @@ export default async function MovieDetails({
           </div>
         )}
       </div>
-      <div className="w-full p-4 border-t">
+      <div className="w-full p-4">
         <h2 className="text-xl pb-4 font-bold">You might also like these...</h2>
         <RecommendedMoviesRow basedOn={params.id} />
       </div>
