@@ -54,7 +54,7 @@ export default async function MovieDetails({
               {cast.slice(0, 15).map((actor) => (
                 <div
                   key={actor.id}
-                  className="flex flex-col border rounded-lg overflow-hidden w-1/3 md:w-1/6 shrink-0 justify-evenly items-center"
+                  className="flex flex-col border rounded-lg overflow-hidden w-1/3 md:w-1/4 lg:w-1/6 shrink-0 justify-evenly items-center"
                 >
                   <Image
                     src={`https://image.tmdb.org/t/p/w500${actor.profile_path}`}
@@ -65,7 +65,7 @@ export default async function MovieDetails({
                   <p className="text-center text-sm md:text-base p-2 px-2 md:px-4">
                     {actor.name}
                   </p>
-                  <p className="text-center text-sm md:text-base w-full px-2 md:px-4 py-2 font-light text-gray-400">
+                  <p className="text-center text-sm md:text-base w-full px-2 lg:px-4 py-2 font-light text-gray-400">
                     {actor.character}
                   </p>
                 </div>
