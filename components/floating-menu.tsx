@@ -25,6 +25,7 @@ export default function FloatingMenu() {
             alt="Cineverse Logo"
             width={40}
             height={40}
+            unoptimized
           />
           <h1 className="text-xl lg:text-2xl xl:text-3xl font-bold">
             Cineverse

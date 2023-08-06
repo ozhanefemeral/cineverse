@@ -24,6 +24,7 @@ export default async function MovieDetails({
           alt={details.title!}
           width={500}
           height={750}
+          unoptimized
         />
       </div>
 
@@ -61,6 +62,7 @@ export default async function MovieDetails({
                     alt={actor.name + " poster"}
                     width={150}
                     height={200}
+                    unoptimized
                   />
                   <p className="text-center text-sm md:text-base p-2 px-2 md:px-4">
                     {actor.name}

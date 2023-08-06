@@ -29,6 +29,7 @@ export default async function Home() {
           alt="Cineverse Logo"
           width={150}
           height={150}
+          unoptimized
         />
         <Button variant="link">
           <h1 className="text-4xl font-bold text-center">Cineverse</h1>

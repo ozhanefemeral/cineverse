@@ -21,9 +21,7 @@ export default async function RecommendedMoviesRow({
   } = await getMovieRecommendations(basedOn);
 
   if (totalResults === 0 || !movies)
-    return (
-      <p className="text-gray-400">No recommendations found 😿</p>
-    );
+    return <p className="text-gray-400">No recommendations found 😿</p>;
 
   return (
     <div className="flex flex-row gap-8 overflow-x-scroll w-full">
@@ -40,6 +38,7 @@ export default async function RecommendedMoviesRow({
               className="w-full rounded-lg shadow-md"
               width={200}
               height={300}
+              unoptimized
             />
             <p className="text-center text-sm">{movie.title}</p>
           </div>

@@ -17,6 +17,7 @@ export default function MovieCard({ movie }: { movie: MovieResult }) {
           width={300}
           height={200}
           className="w-full rounded-tl-lg rounded-tr-lg"
+          unoptimized
         />
         <CardTitle className="pt-2 px-4 text-center text-md md:text-lg">
           {movie.title}
